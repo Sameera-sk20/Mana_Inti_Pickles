@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Indian pickle or snack product item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique product slug/identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the product"
+        },
+        "regionalName": {
+          "type": "string",
+          "description": "Telugu script or regional name"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["veg-pickles", "non-veg-pickles", "snacks"],
+          "description": "Primary product category"
+        },
+        "dietaryType": {
+          "type": "string",
+          "enum": ["veg", "non-veg"],
+          "description": "Vegetarian or non-vegetarian designation"
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Brief description for catalog cards"
+        },
+        "detailedDescription": {
+          "type": "string",
+          "description": "Detailed artisanal description"
+        },
+        "ingredients": {
+          "type": "array",
+          "description": "List of natural ingredients"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Product photograph URL"
+        },
+        "pricing": {
+          "type": "object",
+          "description": "Pricing by weight (250g, 500g, 1kg)"
+        },
+        "isAvailable": {
+          "type": "boolean",
+          "description": "Stock availability status"
+        },
+        "spiceLevel": {
+          "type": "string",
+          "enum": ["Mild", "Medium", "Fiery", "Extra Fiery"],
+          "description": "Spice level intensity"
+        }
+      },
+      "required": ["name", "category", "dietaryType", "pricing", "isAvailable"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Public storefront product catalog"
+    }
+  }
+}

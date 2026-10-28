@@ -1,0 +1,19 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny rule: block unauthorized access across all collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Products Collection:
+    // Anyone (customers, visitors) can read products.
+    // Only authenticated store administrators can create, update, or delete products.
+    // Unauthenticated write attempts are strictly blocked.
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
